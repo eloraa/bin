@@ -1,0 +1,49 @@
+@import 'tailwindcss';
+
+:root {
+  --background: #000000;
+  --foreground: #eeeeee;
+  --accent: #e52a57;
+}
+
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+  margin: 0;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-mono), monospace;
+  color-scheme: dark;
+  margin: 0;
+}
+
+.bin-editor {
+  display: block;
+  outline: 0px solid transparent;
+  background: #000;
+  height: 100%;
+  width: 100%;
+  padding: 3em;
+  overflow-x: auto;
+  overflow-y: auto;
+  color: #eee;
+  border: none;
+  resize: none;
+  tab-size: 4;
+}
+
+.accent-text {
+  color: var(--accent);
+}
+
+.accent-bg {
+  background-color: var(--accent);
+}
+
+.hover-accent:hover {
+  background-color: #e52a5736;
+}
