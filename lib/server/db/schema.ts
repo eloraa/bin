@@ -5,6 +5,7 @@ export const bins = pgTable("bins", {
     content: text("content").notNull(),
     language: text("language").notNull(),
     isPrivate: boolean("is_private").default(false).notNull(),
+    isMarkdown: boolean("is_markdown").default(false).notNull(),
     createdAt: timestamp("created_at").defaultNow().notNull(),
     updatedAt: timestamp("updated_at").defaultNow().notNull(),
 });

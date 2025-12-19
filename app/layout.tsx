@@ -20,7 +20,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" style={{ colorScheme: 'dark' }} className={`${firaCode.variable} antialiased bg-black text-[#EEE] font-mono`}>
+    <html lang="en" style={{ colorScheme: 'dark' }} className={`${firaCode.variable} antialiased bg-black text-[#EEE] font-mono dark`}>
       <body>
         <div style={{ display: 'contents', height: '100%' }}>{children}</div>
       </body>

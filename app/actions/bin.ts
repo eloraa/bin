@@ -11,6 +11,7 @@ export async function createBin(_: unknown, formData: FormData) {
   const content = formData.get('content') as string;
   const language = (formData.get('language') as string) || 'plaintext';
   const isPrivate = formData.get('isPrivate') === 'on';
+  const isMarkdown = formData.get('isMarkdown') === 'on';
 
   if (!content) {
     return { error: 'Content is required' };
@@ -28,6 +29,7 @@ export async function createBin(_: unknown, formData: FormData) {
     content,
     language,
     isPrivate,
+    isMarkdown,
   });
 
   redirect(`/bin/${id}`);
@@ -37,6 +39,7 @@ export async function updateBin(id: string, _: unknown, formData: FormData) {
   const content = formData.get('content') as string;
   const language = (formData.get('language') as string) || 'plaintext';
   const isPrivate = formData.get('isPrivate') === 'on';
+  const isMarkdown = formData.get('isMarkdown') === 'on';
 
   if (!content) {
     return { error: 'Content is required' };
@@ -53,6 +56,7 @@ export async function updateBin(id: string, _: unknown, formData: FormData) {
       content,
       language,
       isPrivate,
+      isMarkdown,
       updatedAt: new Date(),
     })
     .where(eq(bins.id, id));

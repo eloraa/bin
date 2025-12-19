@@ -3,6 +3,7 @@ import { bins } from '@/lib/server/db/schema';
 import { eq } from 'drizzle-orm';
 import { notFound } from 'next/navigation';
 import { CodeBlock } from '@/components/CodeBlock';
+import { MarkdownPreview } from '@/components/markdown/markdown';
 import Link from 'next/link';
 import { isAuthenticated } from '@/lib/server/auth-utils';
 
@@ -29,7 +30,13 @@ export default async function ViewBinPage({ params }: PageProps) {
   return (
     <div className="h-full flex flex-col bg-black text-[#EEE]">
       <div className="flex-1 relative pb-8 min-h-0">
-        <CodeBlock code={bin.content} language={bin.language} />
+        {bin.isMarkdown ? (
+          <div className="absolute inset-0 w-full h-full overflow-auto p-4">
+            <MarkdownPreview content={bin.content} />
+          </div>
+        ) : (
+          <CodeBlock code={bin.content} language={bin.language} />
+        )}
       </div>
 
       <footer className="h-8 flex items-center px-4 justify-between fixed bottom-0 w-full bg-[#e52a5706] backdrop-blur-[5px] text-xs z-50">
