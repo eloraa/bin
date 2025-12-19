@@ -283,10 +283,12 @@ interface ImagePopoverProps {
 const ImagePopover: React.FC<ImagePopoverProps> = ({ onImage }) => {
   const [url, setUrl] = useState('');
   const [alt, setAlt] = useState('');
+  const [maxWidth, setMaxWidth] = useState('');
 
   const handleSubmit = () => {
     if (!url) return;
-    onImage(url, alt);
+    const altText = maxWidth ? `${alt} mw${maxWidth}` : alt;
+    onImage(url, altText);
   };
 
   return (
@@ -313,6 +315,11 @@ const ImagePopover: React.FC<ImagePopoverProps> = ({ onImage }) => {
           <div className="space-y-2">
             <Label htmlFor="image-alt">Alt Text</Label>
             <Input id="image-alt" placeholder="Enter alt text" value={alt} onChange={e => setAlt(e.target.value)} />
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="image-maxwidth">Max Width (optional, in pixels)</Label>
+            <Input id="image-maxwidth" placeholder="e.g. 800" value={maxWidth} onChange={e => setMaxWidth(e.target.value)} />
           </div>
 
           <Button type="button" variant="secondary" onClick={handleSubmit} className="w-full rounded-full">

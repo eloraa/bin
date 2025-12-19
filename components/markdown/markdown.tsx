@@ -329,6 +329,27 @@ export const MarkdownPreview: React.FC<MarkdownPreviewProps> = React.memo(({ con
           );
         }
 
+        // Check for max-width syntax: ![Alt text mw800](url) or ![Alt text maxw800](url)
+        const maxWidthMatch = alt?.match(/^(.*?)\s+(?:mw|maxw)(\d+)$/);
+        if (maxWidthMatch) {
+          const [, caption, maxWidth] = maxWidthMatch;
+          const style = { maxWidth: `${maxWidth}px` };
+
+          if (!hideCaption && caption) {
+            return (
+              <figure className="relative w-full overflow-hidden rounded-2xl my-4" style={style}>
+                <Image className="rounded-lg max-w-full h-auto static!" src={src || ''} fill alt={caption || ''} />
+                <figcaption className="text-center text-sm text-foreground/60 mt-2">{caption}</figcaption>
+              </figure>
+            );
+          }
+          return (
+            <figure className="relative w-full overflow-hidden rounded-2xl my-4" style={style}>
+              <Image fill src={src || ''} alt={caption || ''} className="rounded-lg max-w-full h-auto static!" loading="lazy" />
+            </figure>
+          );
+        }
+
         if (!hideCaption) {
           return (
             <figure className="relative w-full overflow-hidden rounded-2xl my-4">
